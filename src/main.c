@@ -2,8 +2,8 @@
 #include "raygui.h"
 #include "stdio.h"
 
-static const int SCREEN_HEIGHT = 1080;
-static const int SCREEN_WIDTH = 1920;
+static const int SCREEN_HEIGHT = 2000;
+static const int SCREEN_WIDTH = 2000;
 static const int BALL_RADIUS = 20;
 
 typedef struct Ball
@@ -83,11 +83,22 @@ int main(void)
         // Draw
         BeginDrawing();
 
-        ClearBackground(GRAY);
+        ClearBackground(BLACK);
         BeginMode2D(camera);
-        DrawGrid(100, 50);
+
         DrawFPS(0, 0);
 
+        // Draw Grid
+        for (int i = 0; i < SCREEN_WIDTH; i += 200)
+        {
+            DrawLine(i, 0, i, SCREEN_HEIGHT, GREEN);
+        }
+        for (int i = 0; i < SCREEN_HEIGHT; i += 200)
+        {
+            DrawLine(0, i, SCREEN_WIDTH, i, GREEN);
+        }
+
+        // Draw paused text when paused
         if (!unPaused)
         {
             DrawText("PAUSED", SCREEN_WIDTH - 135, 0, 30, GREEN);
