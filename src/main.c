@@ -120,4 +120,22 @@ Vector2 initBallVel(void)
     };
 }
 
-void handleWallCollision(Ball *ball) {}
+void handleWallCollision(Ball *ball)
+{
+    if (ball->position.x + BALL_RADIUS > SCREEN_WIDTH)
+    {
+        ball->velocity.x *= -1;
+    }
+    if (ball->position.x - BALL_RADIUS < 0)
+    {
+        ball->velocity.x *= -1;
+    }
+    if (ball->position.y + BALL_RADIUS > SCREEN_HEIGHT)
+    {
+        ball->velocity.y *= -1;
+    }
+    if (ball->position.y - BALL_RADIUS < 0)
+    {
+        ball->velocity.y *= -1;
+    }
+}
