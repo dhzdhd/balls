@@ -1,17 +1,11 @@
 #include "raylib.h"
 #include "raygui.h"
 #include "stdio.h"
+#include "collision.h"
 
-static const int SCREEN_HEIGHT = 2000;
-static const int SCREEN_WIDTH = 2000;
-static const int BALL_RADIUS = 20;
-
-typedef struct Ball
-{
-    Vector2 position;
-    Vector2 velocity;
-    Color color;
-} Ball;
+const int SCREEN_HEIGHT = 2000;
+const int SCREEN_WIDTH = 2000;
+const int BALL_RADIUS = 30;
 
 // Function prototypes
 Vector2 initBallVel(void);
@@ -27,6 +21,7 @@ Ball ballList[1000] = {};
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "balls!");
+    initHash();
 
     Camera2D camera = {0};
     camera.offset = (Vector2){0, 0};
@@ -77,7 +72,10 @@ int main(void)
                 ball->position.y += ball->velocity.y;
 
                 handleWallCollision(ball);
+                hash(ball->position, ball, ballAmount);
             }
+            checkCollision();
+            initHash();
         }
 
         // Draw
@@ -152,15 +150,5 @@ void handleWallCollision(Ball *ball)
     if (ball->position.y + BALL_RADIUS > SCREEN_HEIGHT || ball->position.y - BALL_RADIUS < 0)
     {
         ball->velocity.y *= -1;
-    }
-}
-
-void handleBallCollision(Ball *firstBall, Ball *secondBall)
-{
-    bool collision = CheckCollisionCircles(firstBall->position, BALL_RADIUS, secondBall->position, BALL_RADIUS);
-
-    if (collision)
-    {
-        firstBall->velocity.x = 0;
     }
 }
