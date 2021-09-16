@@ -15,9 +15,9 @@ void initHash(void)
     }
 }
 
-void hash(Vector2 position, Ball *ball, int ballAmount)
+void addHash(Vector2 position, Ball *ball, int ballAmount)
 {
-    // Unique grid cell for a ball position
+    // Grid cell for a ball position
     int gridCell = (int)(position.x / CELL_SIZE) + (int)(position.y / CELL_SIZE) * WIDTH;
 
     // Adding balls to the HashMap and spatialList
@@ -37,20 +37,54 @@ void checkCollision(void)
         if (amount > 1)
         {
             // wrong ranges
-            for (int j = 2; j < amount; j++)
+            for (int j = 0; j < amount; j++)
             {
-                for (int k = 2; k < j; k++)
+                for (int k = 0; k < amount; k++)
                 {
-                    Ball *firstBall = balls[j];
-                    Ball *secondBall = balls[k];
-                    bool collision = CheckCollisionCircles(firstBall->position, 30, secondBall->position, 30);
-                    if (collision)
+                    if (j != k)
                     {
-                        // (firstBall)->velocity.x = 0;
-                        printf("Collision!\n");
+                        Ball *firstBall = balls[j];
+                        Ball *secondBall = balls[k];
+                        bool collision = CheckCollisionCircles((*firstBall).position, 10, (*secondBall).position, 10);
+                        if (collision)
+                        {
+                            // (firstBall)->velocity.x = 0;
+                            printf("Collision!\n");
+                        }
                     }
                 }
             }
         }
     }
+}
+
+void checkBruteCollision(Ball *ballList, int ballAmount)
+{
+    for (int i = 0; i < ballAmount; i++)
+    {
+        for (int j = 0; j < ballAmount; j++)
+        {
+            Ball firstBall = ballList[i];
+            Ball secondBall = ballList[j];
+
+            bool collision = CheckCollisionCircles(firstBall.position, BALL_RADIUS, secondBall.position, BALL_RADIUS);
+            if (collision && (i != j))
+            {
+                elasticCollision(&ballList[i], &ballList[j]);
+            }
+        }
+    }
+}
+
+void elasticCollision(Ball *firstBall, Ball *secondBall)
+{
+    float firstVelX = firstBall->velocity.x;
+    float firstVelY = firstBall->velocity.y;
+    float secondVelX = secondBall->velocity.x;
+    float secondVelY = secondBall->velocity.y;
+
+    firstBall->velocity.x = -secondVelX;
+    firstBall->velocity.y = -secondVelY;
+    secondBall->velocity.x = -firstVelX;
+    secondBall->velocity.y = -firstVelY;
 }
