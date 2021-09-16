@@ -71,6 +71,7 @@ void checkBruteCollision(Ball *ballList, int ballAmount)
             if (collision && (i != j))
             {
                 elasticCollision(&ballList[i], &ballList[j]);
+                printf("collision! %i, %i\n", i, j);
             }
         }
     }
