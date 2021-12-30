@@ -1,5 +1,6 @@
 #include "raylib.h"
 
+#define RAYGUI_IMPLEMENTATION
 #ifndef GAME
 #define GAME
 

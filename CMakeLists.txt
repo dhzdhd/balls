@@ -7,7 +7,7 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.c)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include/)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

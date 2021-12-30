@@ -3,6 +3,6 @@
 #ifndef GUI
 #define GUI
 
-void guiSetup(void);
+void guiSetup(bool *start);
 
 #endif

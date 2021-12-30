@@ -18,7 +18,6 @@ static const int GRID_NUMBER = 100;
 
 void addHash(Vector2 position, Ball *ball, int ballAmount);
 void initHash(void);
-void checkCollision(void);
 void checkBruteCollision(Ball *ballList, int ballAmount);
 void elasticCollision(Ball *firstBall, Ball *secondBall);
 
