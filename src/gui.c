@@ -3,16 +3,16 @@
 
 #include <stdio.h>
 
-void guiSetup(bool *start)
+void gui_setup(bool *start)
 {
     BeginDrawing();
 
     ClearBackground(BLACK);
 
-    DrawText("Balls!", SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 340, 70, GREEN);
-     if (GuiButton((Rectangle){SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 140, 300, 100}, "Hello"))
+    DrawText("Balls!", SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 - 340, 70, GREEN);
+     if (GuiButton((Rectangle){SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 50, 300, 100}, "Hello"))
      {
-         printf("yoo");
+         *start = true;
      }
 
     EndDrawing();

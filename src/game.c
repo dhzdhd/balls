@@ -3,43 +3,43 @@
 #include "collision.h"
 #include <stdio.h>
 
-int ballAmount = 0;
-Ball ballList[1000];
+int ball_amount = 0;
+Ball ball_list[1000];
 
-void gameSetup(bool paused, Camera2D camera)
+void game_setup(bool paused, Camera2D camera)
 {
     // Update
     if (IsMouseButtonPressed(0))
     {
-        Vector2 ballPos = GetMousePosition();
-        Vector2 ballVel = initBallVel();
-        ballList[ballAmount] = (Ball){ballPos, ballVel, COLOR_LIST[GetRandomValue(0, COLOR_AMOUNT)]};
-        ballAmount += 1;
+        Vector2 ball_pos = GetMousePosition();
+        Vector2 ball_vel = init_ball_vel();
+        ball_list[ball_amount] = (Ball){ball_pos, ball_vel, COLOR_LIST[GetRandomValue(0, COLOR_AMOUNT)]};
+        ball_amount += 1;
     }
     if (IsMouseButtonPressed(1))
     {
-        if (ballAmount != 0)
-            ballAmount -= 1;
+        if (ball_amount != 0)
+            ball_amount -= 1;
     }
     if (IsKeyPressed(KEY_C))
     {
-        ballAmount = 0;
+        ball_amount = 0;
     }
 
     if (paused == false)
     {
-        for (int i = 0; i < ballAmount; i++)
+        for (int i = 0; i < ball_amount; i++)
         {
-            Ball *ball = &ballList[i];
+            Ball *ball = &ball_list[i];
             ball->position.x += ball->velocity.x;
             ball->position.y += ball->velocity.y;
 
-            handleWallCollision(ball);
-            // addHash(ball->position, ball, ballAmount);
+            handle_wall_collision(ball);
+            // addHash(ball->position, ball, ball_amount);
         }
         // checkCollision();
-        checkBruteCollision(ballList, ballAmount);
-        initHash();
+        check_brute_collision(ball_list, ball_amount);
+        init_hash();
     }
 
     // Draw
@@ -51,7 +51,7 @@ void gameSetup(bool paused, Camera2D camera)
     DrawFPS(0, 0);
 
     char ballAmountStr[1000];
-    sprintf(ballAmountStr, "%i", ballAmount);
+    sprintf(ballAmountStr, "%i", ball_amount);
     DrawText("Amount: ", 100, 0, 20, GREEN);
     DrawText(ballAmountStr, 180, 0, 20, GREEN);
 
@@ -71,21 +71,21 @@ void gameSetup(bool paused, Camera2D camera)
         DrawText("PAUSED", SCREEN_WIDTH - 135, 0, 30, GREEN);
     }
 
-    if (ballAmount != 0)
+    if (ball_amount != 0)
     {
-        for (int i = 0; i < ballAmount; i++)
+        for (int i = 0; i < ball_amount; i++)
         {
-            Ball ball = ballList[i];
+            Ball ball = ball_list[i];
             DrawCircle(ball.position.x, ball.position.y, BALL_RADIUS, ball.color);
 
             if (paused)
             {
                 float x = ball.position.x;
                 float y = ball.position.y;
-                Vector2 mousePos = GetMousePosition();
+                Vector2 mouse_pos = GetMousePosition();
 
                 // If mouse is centered on the ball
-                if ((x - BALL_RADIUS < mousePos.x && x + BALL_RADIUS > mousePos.x) && (y - BALL_RADIUS < mousePos.y && y + BALL_RADIUS > mousePos.y))
+                if ((x - BALL_RADIUS < mouse_pos.x && x + BALL_RADIUS > mouse_pos.x) && (y - BALL_RADIUS < mouse_pos.y && y + BALL_RADIUS > mouse_pos.y))
                 {
                     char buffer[100];
                     sprintf(buffer, "%i, %i", (int)ball.position.x, (int)ball.position.y);
@@ -98,7 +98,7 @@ void gameSetup(bool paused, Camera2D camera)
     EndDrawing();
 }
 
-Vector2 initBallVel(void)
+Vector2 init_ball_vel(void)
 {
     return (Vector2){
         GetRandomValue(-5, 5),
@@ -106,7 +106,7 @@ Vector2 initBallVel(void)
     };
 }
 
-void handleWallCollision(Ball *ball)
+void handle_wall_collision(Ball *ball)
 {
     if (ball->position.x + BALL_RADIUS > SCREEN_WIDTH || ball->position.x - BALL_RADIUS < 0)
     {

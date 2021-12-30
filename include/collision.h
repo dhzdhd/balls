@@ -16,9 +16,9 @@ static const float CELL_SIZE = 100;
 static const int WIDTH = 10;
 static const int GRID_NUMBER = 100;
 
-void addHash(Vector2 position, Ball *ball, int ballAmount);
-void initHash(void);
-void checkBruteCollision(Ball *ballList, int ballAmount);
-void elasticCollision(Ball *firstBall, Ball *secondBall);
+void add_hash(Vector2 position, Ball *ball, int ball_amount);
+void init_hash(void);
+void check_brute_collision(Ball *ball_list, int ball_amount);
+void elastic_collision(Ball *first_ball, Ball *second_ball);
 
 #endif

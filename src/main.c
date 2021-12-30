@@ -6,7 +6,6 @@
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "balls!");
-    initHash();
 
     Camera2D camera = {0};
     camera.offset = (Vector2){0, 0};
@@ -26,14 +25,14 @@ int main(void)
             if (IsKeyPressed(KEY_Q))
                 start = false;
 
-            gameSetup(paused, camera);
+            game_setup(paused, camera);
         }
         else
         {
             if (IsKeyPressed(KEY_ENTER))
                 start = true;
 
-            guiSetup(&start);
+            gui_setup(&start);
         }
     }
 
