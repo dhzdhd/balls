@@ -3,6 +3,7 @@
 
 #include "raygui.h"
 #include "raylib.h"
+#include <stdio.h>
 
 void guiSetup(void)
 {
@@ -12,9 +13,9 @@ void guiSetup(void)
 
     DrawText("Balls!", SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 140, 70, GREEN);
     // if (GuiButton((Rectangle){SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 140, 50, 50}, "Hello"))
-    {
-        // printf("yoo");
-    }
+    // {
+    //     printf("yoo");
+    // }
 
     EndDrawing();
 }

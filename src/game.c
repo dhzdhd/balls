@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "game.h"
+#include "collision.h"
 #include <stdio.h>
 
 int ballAmount = 0;
@@ -49,15 +50,20 @@ void gameSetup(bool paused, Camera2D camera)
 
     DrawFPS(0, 0);
 
+    char ballAmountStr[1000];
+    sprintf(ballAmountStr, "%i", ballAmount);
+    DrawText("Amount: ", 100, 0, 20, GREEN);
+    DrawText(ballAmountStr, 180, 0, 20, GREEN);
+
     // Draw Grid
-    for (int i = 0; i < SCREEN_WIDTH; i += 100)
-    {
-        DrawLine(i, 0, i, SCREEN_HEIGHT, GREEN);
-    }
-    for (int i = 0; i < SCREEN_HEIGHT; i += 100)
-    {
-        DrawLine(0, i, SCREEN_WIDTH, i, GREEN);
-    }
+    // for (int i = 0; i < SCREEN_WIDTH; i += 100)
+    // {
+    //     DrawLine(i, 0, i, SCREEN_HEIGHT, GREEN);
+    // }
+    // for (int i = 0; i < SCREEN_HEIGHT; i += 100)
+    // {
+    //     DrawLine(0, i, SCREEN_WIDTH, i, GREEN);
+    // }
 
     // Draw paused text when paused
     if (paused)
@@ -95,8 +101,8 @@ void gameSetup(bool paused, Camera2D camera)
 Vector2 initBallVel(void)
 {
     return (Vector2){
-        GetRandomValue(-10, 10),
-        GetRandomValue(-10, 10),
+        GetRandomValue(-5, 5),
+        GetRandomValue(-5, 5),
     };
 }
 

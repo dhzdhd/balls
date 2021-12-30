@@ -23,6 +23,7 @@ void addHash(Vector2 position, Ball *ball, int ballAmount)
     // Adding balls to the HashMap and spatialList
     int amount = spatialList[gridCell].amount;
     Ball *balls = spatialList[gridCell].balls;
+    printf("%i, %i\n", gridCell, amount);
     balls[amount + 1] = *ball;
     spatialList[gridCell] = (HashMap){amount + 1, balls};
 }
@@ -36,7 +37,6 @@ void checkCollision(void)
 
         if (amount > 1)
         {
-            // wrong ranges
             for (int j = 0; j < amount; j++)
             {
                 for (int k = 0; k < amount; k++)
@@ -45,11 +45,11 @@ void checkCollision(void)
                     {
                         Ball *firstBall = balls[j];
                         Ball *secondBall = balls[k];
-                        bool collision = CheckCollisionCircles((*firstBall).position, 10, (*secondBall).position, 10);
+                        bool collision = CheckCollisionCircles((*firstBall).position, BALL_RADIUS, (*secondBall).position, BALL_RADIUS);
                         if (collision)
                         {
-                            // (firstBall)->velocity.x = 0;
-                            printf("Collision!\n");
+                            elasticCollision(&balls[i], &balls[j]);
+                            printf("collision! %i, %i\n", i, j);
                         }
                     }
                 }
@@ -84,8 +84,10 @@ void elasticCollision(Ball *firstBall, Ball *secondBall)
     float secondVelX = secondBall->velocity.x;
     float secondVelY = secondBall->velocity.y;
 
-    firstBall->velocity.x = -secondVelX;
-    firstBall->velocity.y = -secondVelY;
-    secondBall->velocity.x = -firstVelX;
-    secondBall->velocity.y = -firstVelY;
+    printf("%f, %f, %f, %f\n", firstVelX, firstVelY, secondVelX, secondVelY);
+
+    firstBall->velocity.x = secondVelX;
+    firstBall->velocity.y = secondVelY;
+    secondBall->velocity.x = firstVelX;
+    secondBall->velocity.y = firstVelY;
 }

@@ -1,14 +1,11 @@
 #include "raylib.h"
-#include "raygui.h"
-#include "stdio.h"
 #include "game.h"
 #include "gui.h"
-#include "collision.h"
 
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "balls!");
-    initHash();
+//    initHash();
 
     Camera2D camera = {0};
     camera.offset = (Vector2){0, 0};
