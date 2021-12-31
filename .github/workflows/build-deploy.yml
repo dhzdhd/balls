@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: |
         cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-        ls -a
+        ls build/ -a
         
 #       cmake . && make && ./balls
       
