@@ -24,6 +24,8 @@ jobs:
       run: |
         cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
         ls ${{ github.workspace }}
+        ls build/
+        ls out/
         
 #       cmake . && make && ./balls
 
