@@ -26,10 +26,10 @@ jobs:
     - name: Build
 #       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       run: | 
-        ls ${{ github.workspace }} -a
+        ls ${{ github.workspace }}
         cmake . && make && ./balls
 
     - name: Test
 #       working-directory: ${{github.workspace}}/build
-      run: ls -a
+      run: ls
       
